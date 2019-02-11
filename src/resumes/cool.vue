@@ -47,7 +47,7 @@
           </div>
 
           <div class="section-content section-content--plain">
-            <div class="section-link">
+            <div v-if="person.contact.street" class="section-link">
               <i class="section-link__icon material-icons">business</i>{{ person.contact.street }}
             </div>
 
@@ -104,6 +104,7 @@
               :key="index"
               class="section-content__item"
               :href="experience.website">
+              <img v-attr="src: ../../resume/{{ experience.logo }}"/>
 
               <span class="section-content__header">{{ experience.position }}</span>
               <span class="section-content__subheader">
@@ -176,6 +177,44 @@
             </a>
           </div>
         </div>
+
+        <div
+          v-if="person.hobbies"
+          class="section">
+          <div class="section-headline">
+            <i class="section-headline__icon fa fa-heart"></i>{{lang.hobbies}}
+          </div>
+
+          <div class="section-content-grid">
+            <a
+                    v-for="(hobby, index) in person.hobbies"
+                    class="grid-item"
+                    :key="index"
+                    :href="hobby.url">
+              <span class="squarred-grid-item dark">
+                {{ hobby.name }}
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div
+          v-if="person.languages"
+          class="section">
+
+          <div class="section-headline">
+            <i class="section-headline__icon material-icons">language</i>{{ lang.languages }}
+          </div>
+
+          <a
+                  v-for="(language, index) in person.languages"
+                  :key="index"
+                  class="section-content__item">
+            <span class="section-content__header inline">{{ language.name }}</span>
+            <span class="section-content__subheader inline">{{ language.level }}</span>
+          </a>
+        </div>
+
       </div>
     </div>
 
@@ -194,7 +233,7 @@ export default Vue.component(name, getVueOptions(name));
 
 <style lang="less" scoped>
 @accent-color: #34495E;
-@banner-color: #42b883;
+@banner-color: #189dc9;
 @banner-height: 120px;
 @picture-size: 120px;
 @picture-offset: 35px;
@@ -220,7 +259,7 @@ a {
 .picture {
   position: absolute;
   top: @banner-height - @picture-offset;
-  left: @left-column-width + @base-padding * 2 - @picture-size / 2;
+  left: @left-column-width + @base-padding * 2 - @picture-size / 2 + 1;
   height: @picture-size;
   width: @picture-size;
   border-radius: 50%;
@@ -372,5 +411,14 @@ a {
   color: white;
   margin-top: 5px;
   padding: 5px;
+}
+
+.squarred-grid-item.dark {
+  border: 1px solid #33495e;
+  color: #33495e;
+}
+
+.inline {
+  display: inline-block;
 }
 </style>
