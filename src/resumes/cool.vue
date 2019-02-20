@@ -104,7 +104,6 @@
               :key="index"
               class="section-content__item"
               :href="experience.website">
-              <img :src="loadLogo(experience.logo)" class="experience-logo">
 
               <span class="section-content__header">{{ experience.position }}</span>
               <span class="section-content__subheader">
