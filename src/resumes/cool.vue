@@ -104,7 +104,7 @@
               :key="index"
               class="section-content__item"
               :href="experience.website">
-              <img v-attr="src: ../../resume/{{ experience.logo }}"/>
+              <img :src="loadLogo(experience.logo)" class="experience-logo">
 
               <span class="section-content__header">{{ experience.position }}</span>
               <span class="section-content__subheader">
@@ -228,7 +228,17 @@ import { getVueOptions } from './options';
 
 const name = 'cool';
 
-export default Vue.component(name, getVueOptions(name));
+let options = Vue.extend(getVueOptions(name));
+options = Vue.extend({
+    methods: {
+        loadLogo: function(filename) {
+            console.log(filename);
+            return require('../../resume/play.png');
+        }
+    }
+});
+
+export default Vue.component(name, options);
 </script>
 
 <style lang="less" scoped>
@@ -345,6 +355,13 @@ a {
   &__icon {
     color: white;
   }
+}
+
+.experience-logo {
+  width: 30px;
+  float: left;
+  margin-left: -35px;
+  margin-right: 5px;
 }
 
 .section-content {
