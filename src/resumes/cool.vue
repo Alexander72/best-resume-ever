@@ -227,17 +227,7 @@ import { getVueOptions } from './options';
 
 const name = 'cool';
 
-let options = Vue.extend(getVueOptions(name));
-options = Vue.extend({
-    methods: {
-        loadLogo: function(filename) {
-            console.log(filename);
-            return require('../../resume/play.png');
-        }
-    }
-});
-
-export default Vue.component(name, options);
+export default Vue.component(name, getVueOptions(name));
 </script>
 
 <style lang="less" scoped>
